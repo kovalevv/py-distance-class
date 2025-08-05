@@ -1,14 +1,17 @@
+from __future__ import
+
+
 class Distance:
-    def __init__ (self, km: int) -> None:
+    def __init__(self, km: int) -> None:
         self.km = km
 
-    def __str__ (self) -> str:
+    def __str__(self) -> str:
         return f"Distance: {self.km} kilometers."
 
     def __repr__(self) -> str:
         return f"Distance(km={self.km})"
 
-    def __add__(self, other):
+    def __add__(self, other: int | float):
         if isinstance(other, Distance):
             return Distance(self.km + other.km)
         return Distance(self.km + other)
@@ -16,14 +19,14 @@ class Distance:
     def __iadd__(self, other):
         if isinstance(other, Distance):
             self.km += other.km
-        else:
+        elif isinstance(other, (int, float)):
             self.km += other
         return self
 
-    def __mul__(self, multiplier: int):
+    def __mul__(self, multiplier: int | float):
         return Distance(self.km * multiplier)
 
-    def __truediv__(self, divisor):
+    def __truediv__(self, divisor: int | float):
         return Distance(round(self.km / divisor, 2))
 
     def __lt__(self, other):
@@ -42,7 +45,7 @@ class Distance:
         return self.km == other
 
     def __le__(self, other):
-        if isinstance(other, Distance):
+        if isinstance(other: int | float, Distance):
             return self.km <= other.km
         return self.km <= other
 
